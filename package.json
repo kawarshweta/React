@@ -1,0 +1,16 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "React app",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "shweta Kawar",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.3"
+  },
+  "browerslist": [
+    "last 2 versions"
+  ]
+}

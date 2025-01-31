@@ -24,7 +24,7 @@ const restObj = [
                       "Ice Cream",
                       "Juices"
                     ],
-                    "avgRating": 4.6,
+                    "avgRating": 3,
                     "parentId": "372261",
                     "avgRatingString": "4.6",
                     "totalRatingsString": "201",
@@ -132,7 +132,7 @@ const restObj = [
                       "Pizzas",
                       "Beverages"
                     ],
-                    "avgRating": 4.3,
+                    "avgRating": 3.9,
                     "veg": true,
                     "parentId": "91830",
                     "avgRatingString": "4.3",
@@ -239,7 +239,7 @@ const restObj = [
                     "cuisines": [
                       "Pizzas"
                     ],
-                    "avgRating": 4,
+                    "avgRating": 3,
                     "parentId": "721",
                     "avgRatingString": "4.0",
                     "totalRatingsString": "2.8K+",
@@ -360,7 +360,7 @@ const restObj = [
                       "Cafe",
                       "Desserts"
                     ],
-                    "avgRating": 4.6,
+                    "avgRating": 3.5,
                     "parentId": "630",
                     "avgRatingString": "4.6",
                     "totalRatingsString": "1.4K+",

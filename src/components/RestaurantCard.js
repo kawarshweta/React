@@ -12,7 +12,7 @@ const RestaurantCard = (props) => {
     } = info || {};
 
     return(
-        <div className="w-1/6 border-2 rounded-md p-3 mt-6 mx-6">
+        <div className="w-1/6 border-2 rounded-md m-3 p-4">
             <img className="w-64 rounded-md mb-2 h-52" src={IMG_URL + cloudinaryImageId}/>
             <h3 className="">{name}</h3>
             <div className="flex justify-start">

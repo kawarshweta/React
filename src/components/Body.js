@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [topRestaurants, setTopRestaurants] = useState([]);
+  const [restaurantList, setRestaurantList] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurnts] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -15,36 +17,44 @@ const Body = () => {
     );
 
     const json = await data.json();
-    // console.log(json)
-    setTopRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    setRestaurantList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurnts(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
-  return topRestaurants?.length === 0 ? (
+  return restaurantList?.length === 0 ? (
     <Shimmer />
   ) : (
     <div>
       <input
-        className="border-2 p-3 rounded-md my-4 mx-6"
+        className="border-2 p-3 rounded-md my-4"
         type="text"
         placeholder="Search..."
+        value={searchText}
+        onChange={(e) => {setSearchText(e.target.value)
+        }}
       />
-      <button 
-       className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded-md"
+      <button className="border p-3 rounded-md" 
+      onClick={() => {
+        const filteredRestaurants = restaurantList.filter(
+          (restaurant) => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setFilteredRestaurnts(filteredRestaurants);
+        }}>
+        Search
+      </button>
+      <button
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded-md mx-4"
         onClick={() => {
-          const filteredRestaurants = topRestaurants.filter(
+          const filteredRestaurants = restaurantList.filter(
             (restaurant) => parseFloat(restaurant?.info?.avgRatingString) > 4.4
           );
-          setTopRestaurants(filteredRestaurants);
-          console.log(filteredRestaurants)
-          console.log(topRestaurants)
+          setFilteredRestaurnts(filteredRestaurants);
         }}
       >
         Top Rated Restaurants
       </button>
       <div className="flex flex-wrap justify-center">
-        {topRestaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} restData={restaurant} />
         ))}
       </div>

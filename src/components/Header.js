@@ -1,5 +1,6 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
   //   let btnName = "login";
 
@@ -12,7 +13,9 @@ const Header = () => {
       </div>
       <div className="flex items-center">
         <ul className="flex gap-6 items-center">
-          <li>Home</li>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
           <li>Service</li>
           <li>About Us</li>
           <li>Cart</li>

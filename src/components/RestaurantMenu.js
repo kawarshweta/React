@@ -1,26 +1,10 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resMenu, setResMenu] = useState(null);
   const { resId } = useParams();
 
-  useEffect(() => {
-    if (!resId) return;
-    fetchData(resId);
-  }, [resId]);
-
-  const fetchData = async (restaurantId) => {
-    try {
-      const response = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.1160966&lng=72.9977486&restaurantId=${restaurantId}`
-      );
-      const json = await response.json();
-      setResMenu(json.data);
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-    }
-  };
+  const resMenu = useRestaurantMenu(resId)
 
   if (!resMenu) {
     return <h2>Loading...</h2>; // Prevents accessing undefined properties

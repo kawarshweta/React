@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { labelledRestaurant } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurnts] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const promotedRestaurantCards = labelledRestaurant(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -19,16 +21,20 @@ const Body = () => {
     );
 
     const json = await data.json();
-    setRestaurantList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurnts(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setRestaurantList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    console.log(json)
+    setFilteredRestaurnts(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   const onlineStatus = useOnlineStatus();
 
-  if (!onlineStatus) { 
+  if (!onlineStatus) {
     return <div> Oooops!! Check your internet connection </div>;
   }
-  
 
   return restaurantList?.length === 0 ? (
     <Shimmer />
@@ -39,16 +45,21 @@ const Body = () => {
         type="text"
         placeholder="Search..."
         value={searchText}
-        onChange={(e) => {setSearchText(e.target.value)
+        onChange={(e) => {
+          setSearchText(e.target.value);
         }}
       />
-      <button className="border p-3 rounded-md" 
-      onClick={() => {
-        const filteredRestaurants = restaurantList.filter(
-          (restaurant) => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
-        );
-        setFilteredRestaurnts(filteredRestaurants);
-        }}>
+      <button
+        className="border p-3 rounded-md"
+        onClick={() => {
+          const filteredRestaurants = restaurantList.filter((restaurant) =>
+            restaurant.info.name
+              .toLowerCase()
+              .includes(searchText.toLowerCase())
+          );
+          setFilteredRestaurnts(filteredRestaurants);
+        }}
+      >
         Search
       </button>
       <button
@@ -64,7 +75,16 @@ const Body = () => {
       </button>
       <div className="flex flex-wrap justify-center gap-4">
         {filteredRestaurants.map((restaurant) => (
-          <Link className="block w-full sm:w-[300px] p-2" key={restaurant.info.id} to={`/restaurantmenu/${restaurant.info.id}`}><RestaurantCard  restData={restaurant} /></Link>
+          <Link
+            className="block w-full sm:w-[300px] p-2"
+            key={restaurant.info.id}
+            to={`/restaurantmenu/${restaurant.info.id}`}
+          >
+            {/* {
+              restaurant.data.promoted === true ? <promotedRestaurantCards restData={restaurant}/> : <RestaurantCard restData={restaurant} />
+            } */}
+            <RestaurantCard restData={restaurant}/>
+          </Link>
         ))}
       </div>
     </div>

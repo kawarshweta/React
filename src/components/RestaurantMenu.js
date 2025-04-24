@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategories from "./RestaurantCategories";
 
@@ -6,6 +7,13 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
 
   const resMenu = useRestaurantMenu(resId);
+  const[showItems, setShowItems] = useState(false);
+  const[showIndex, setShowIndex] = useState(0)
+
+  const handlClick = () =>{
+    console.log("click")
+    setShowItems(!showItems)  
+  }
 
   if (!resMenu) {
     return <h2>Loading...</h2>; // Prevents accessing undefined properties
@@ -29,7 +37,6 @@ const RestaurantMenu = () => {
     // console.log("menu-item", RestaurantCategories);
 
     const categories = resMenu?.cards?.find((card) => card?.groupedCard?.cardGroupMap?.REGULAR)?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
-    // console.log("categories", categories);
 
   return (
     <div className="text-center">
@@ -38,22 +45,16 @@ const RestaurantMenu = () => {
         <h2>{costForTwoMessage} <span>{locality}</span> </h2>
         <p>{cuisines.join()}</p>
       </div>
-      {/* <div>
-        <ul>
-          <h2 className="text-2xl font-semibold mt-2">Menus</h2>
-          {menuItem.map((item) => (
-            <li key={item?.card?.info?.id}>
-              {item?.card?.info?.name} - {item?.card?.info?.defaultPrice}
-            </li>
-          ))}
-        </ul>
-      </div> */}
 
       {/* accordion categories  */}
-      {categories.map((Category) =>{
+      {categories.map((Category, index) =>{
         return(
+          // controlled component 
           <RestaurantCategories
+           key={Category?.card?.card?.categoryId}
            data = {Category?.card?.card}
+           showItems={index == showIndex ? true : false}
+           setShowIndex={() =>setShowIndex(index)}
           />
         )
       })}

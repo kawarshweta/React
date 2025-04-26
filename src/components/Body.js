@@ -40,39 +40,41 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div>
-      <input
-        className="border-2 p-3 rounded-md my-4"
-        type="text"
-        placeholder="Search..."
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-        }}
-      />
-      <button
-        className="border p-3 rounded-md"
-        onClick={() => {
-          const filteredRestaurants = restaurantList.filter((restaurant) =>
-            restaurant.info.name
-              .toLowerCase()
-              .includes(searchText.toLowerCase())
-          );
-          setFilteredRestaurnts(filteredRestaurants);
-        }}
-      >
-        Search
-      </button>
-      <button
-        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded-md mx-4"
-        onClick={() => {
-          const filteredRestaurants = restaurantList.filter(
-            (restaurant) => parseFloat(restaurant?.info?.avgRatingString) > 4.4
-          );
-          setFilteredRestaurnts(filteredRestaurants);
-        }}
-      >
-        Top Rated Restaurants
-      </button>
+      <div className="flex items-center justify-end px-16">
+        <input
+          className="border-2 p-3 rounded-md my-4"
+          type="text"
+          placeholder="Search..."
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+        <button
+          className="border p-3 rounded-md"
+          onClick={() => {
+            const filteredRestaurants = restaurantList.filter((restaurant) =>
+              restaurant.info.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase())
+            );
+            setFilteredRestaurnts(filteredRestaurants);
+          }}
+        >
+          Search
+        </button>
+        <button
+          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded-md mx-4"
+          onClick={() => {
+            const filteredRestaurants = restaurantList.filter(
+              (restaurant) => parseFloat(restaurant?.info?.avgRatingString) > 4.4
+            );
+            setFilteredRestaurnts(filteredRestaurants);
+          }}
+        >
+          Top Rated Restaurants
+        </button>
+      </div>
       <div className="flex flex-wrap justify-center gap-4">
         {filteredRestaurants.map((restaurant) => (
           <Link

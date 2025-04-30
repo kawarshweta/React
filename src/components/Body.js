@@ -40,9 +40,9 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div>
-      <div className="flex items-center justify-end px-16">
+      <div className="flex flex-col sm:flex-row items-center justify-center px-4 sm:px-8 py-4 gap-2 sm:gap-4">
         <input
-          className="border-2 p-3 rounded-md my-4"
+          className="border-2 p-2 rounded-md w-full sm:w-1/2 md:w-1/3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500"
           type="text"
           placeholder="Search..."
           value={searchText}
@@ -51,7 +51,7 @@ const Body = () => {
           }}
         />
         <button
-          className="border p-3 rounded-md"
+          className="border p-2 rounded-md text-sm sm:text-base bg-gray-100 hover:bg-gray-200 transition-colors w-full sm:w-auto"
           onClick={() => {
             const filteredRestaurants = restaurantList.filter((restaurant) =>
               restaurant.info.name
@@ -64,7 +64,8 @@ const Body = () => {
           Search
         </button>
         <button
-          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-2 rounded-md mx-4"
+          className="bg-orange-500 hover:bg-orange-700 text-white font-semibold p-2 rounded-md text-sm sm:text-base transition-colors w-full sm:w-auto"
+          aria-label="Filter top-rated restaurants"
           onClick={() => {
             const filteredRestaurants = restaurantList.filter(
               (restaurant) => parseFloat(restaurant?.info?.avgRatingString) > 4.4
@@ -75,10 +76,10 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center p-4">
         {filteredRestaurants.map((restaurant) => (
           <Link
-            className="block w-full sm:w-[300px] p-2"
+            className="w-full sm:w-72 md:w-80 lg:w-96"
             key={restaurant.info.id}
             to={`/restaurantmenu/${restaurant.info.id}`}
           >

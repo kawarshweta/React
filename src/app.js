@@ -10,7 +10,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy } from "react";
 import appStore from "./utils/appstore";
 import { Provider } from "react-redux";
-import Cart from "./components/cart";
+import Cart from "./components/Cart";
 
 const About = lazy (() => import("./components/About"))
 

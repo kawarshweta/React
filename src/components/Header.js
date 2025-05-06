@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Logout");
@@ -80,8 +81,11 @@ const Header = () => {
             <span className="block px-4 sm:px-0">About Us</span>
           </li>
           <li className="py-2 font-bold hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
-            <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="block px-4 sm:px-0">
-              Cart ({cartItems.length} items)
+            <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="block px-4 sm:px-0 relative">
+              <FaShoppingCart className="text-xl" />
+              <span className="absolute -top-3 -right-3 bg-red-600 text-white text-sm px-2 py-0.5 rounded-full">
+                {cartItems.length}
+              </span>
             </Link>
           </li>
           <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">

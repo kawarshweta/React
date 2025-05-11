@@ -10,7 +10,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   
 
-  const promotedRestaurantCards = labelledRestaurant(RestaurantCard);
+  // const promotedRestaurantCards = labelledRestaurant(RestaurantCard);
 
   useEffect(() => {
     fetchData();

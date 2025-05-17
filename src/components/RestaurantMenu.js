@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategories from "./RestaurantCategories";
-
+import ShimmerCategory from "./ShimmerCategory";
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
@@ -16,7 +16,7 @@ const RestaurantMenu = () => {
   }
 
   if (!resMenu) {
-    return <h2>Loading...</h2>; // Prevents accessing undefined properties
+    return <ShimmerCategory />; // Prevents accessing undefined properties
   }
 
   const {

@@ -77,9 +77,6 @@ const Header = () => {
           {/* <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
             <span className="block px-4 sm:px-0">Service</span>
           </li> */}
-          <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
-            <span className="block px-4 sm:px-0">About Us</span>
-          </li>
           <li className="py-2 font-bold hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
             <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="block px-4 sm:px-0 relative">
               <FaShoppingCart className="text-xl" />

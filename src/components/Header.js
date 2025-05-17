@@ -74,9 +74,9 @@ const Header = () => {
               Contact
             </Link>
           </li>
-          <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
+          {/* <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
             <span className="block px-4 sm:px-0">Service</span>
-          </li>
+          </li> */}
           <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
             <span className="block px-4 sm:px-0">About Us</span>
           </li>
@@ -88,9 +88,9 @@ const Header = () => {
               </span>
             </Link>
           </li>
-          <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
+          {/* <li className="py-2 hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
             <span className="block px-4 sm:px-0">{onlineStatus ? "🟢" : "🔴"}</span>
-          </li>
+          </li> */}
           <li className="py-2">
             <button
               className="border px-4 py-1 rounded-md text-base w-full text-left sm:w-auto sm:text-center hover:bg-gray-100 transition-colors"

@@ -8,7 +8,6 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurnts] = useState([]);
   const [searchText, setSearchText] = useState("");
-  
 
   // const promotedRestaurantCards = labelledRestaurant(RestaurantCard);
 
@@ -18,14 +17,16 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.1160966&lng=72.9977486&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      `https://go.x2u.in/proxy?email=shwetakawar5@gmail.com&apiKey=2adc586e&url=${encodeURIComponent(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.1160966&lng=72.9977486&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      )}`
     );
 
     const json = await data.json();
     setRestaurantList(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    console.log(json)
+    console.log(json);
     setFilteredRestaurnts(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -69,7 +70,8 @@ const Body = () => {
           aria-label="Filter top-rated restaurants"
           onClick={() => {
             const filteredRestaurants = restaurantList.filter(
-              (restaurant) => parseFloat(restaurant?.info?.avgRatingString) > 4.4
+              (restaurant) =>
+                parseFloat(restaurant?.info?.avgRatingString) > 4.4
             );
             setFilteredRestaurnts(filteredRestaurants);
           }}
@@ -87,7 +89,7 @@ const Body = () => {
             {/* {
               restaurant.data.promoted === true ? <promotedRestaurantCards restData={restaurant}/> : <RestaurantCard restData={restaurant} />
             } */}
-            <RestaurantCard restData={restaurant}/>
+            <RestaurantCard restData={restaurant} />
           </Link>
         ))}
       </div>

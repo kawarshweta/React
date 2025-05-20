@@ -23,13 +23,27 @@ const Body = () => {
     );
 
     const json = await data.json();
-    setRestaurantList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    console.log(json);
-    setFilteredRestaurnts(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    console.log("API Response:", json);
+
+    // Dynamically search for restaurants list in API response
+    let restaurants = [];
+    for (const card of json?.data?.cards || []) {
+      const resList = card?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      if (Array.isArray(resList)) {
+        restaurants = resList;
+        break;
+      }
+    }
+
+    // Set state if restaurants found
+    if (restaurants.length > 0) {
+      setRestaurantList(restaurants);
+      setFilteredRestaurnts(restaurants);
+    } else {
+      console.warn("No restaurants found in API response");
+      setRestaurantList([]);
+      setFilteredRestaurnts([]);
+    }
   };
 
   const onlineStatus = useOnlineStatus();
@@ -55,12 +69,12 @@ const Body = () => {
         <button
           className="border p-2 rounded-md text-sm sm:text-base bg-gray-100 hover:bg-gray-200 transition-colors w-full sm:w-auto"
           onClick={() => {
-            const filteredRestaurants = restaurantList.filter((restaurant) =>
+            const filtered = restaurantList.filter((restaurant) =>
               restaurant.info.name
                 .toLowerCase()
                 .includes(searchText.toLowerCase())
             );
-            setFilteredRestaurnts(filteredRestaurants);
+            setFilteredRestaurnts(filtered);
           }}
         >
           Search
@@ -69,11 +83,11 @@ const Body = () => {
           className="bg-orange-500 hover:bg-orange-700 text-white font-semibold p-2 rounded-md text-sm sm:text-base transition-colors w-full sm:w-auto"
           aria-label="Filter top-rated restaurants"
           onClick={() => {
-            const filteredRestaurants = restaurantList.filter(
+            const filtered = restaurantList.filter(
               (restaurant) =>
                 parseFloat(restaurant?.info?.avgRatingString) > 4.4
             );
-            setFilteredRestaurnts(filteredRestaurants);
+            setFilteredRestaurnts(filtered);
           }}
         >
           Top Rated Restaurants
@@ -87,9 +101,6 @@ const Body = () => {
               key={restaurant.info.id}
               to={`/restaurantmenu/${restaurant.info.id}`}
             >
-              {/* {
-              restaurant.data.promoted === true ? <promotedRestaurantCards restData={restaurant}/> : <RestaurantCard restData={restaurant} />
-            } */}
               <RestaurantCard restData={restaurant} />
             </Link>
           ))}

@@ -4,31 +4,47 @@ import { addItems } from "../utils/cartSlice";
 
 const ItemList = ({ data }) => {
   const dispatch = useDispatch();
-  
-  const handleAddItem = (item) =>{
-    dispatch(addItems(item))
-  }
+
+  const handleAddItem = (item) => {
+    dispatch(addItems(item));
+  };
+
   return (
     <div>
       {data.map((item, index) => (
-        <div key={`${item.card.info.id}-${index}`} className="flex p-6 border-gray-200 border-b-2 justify-between">
-          <div className="text-start w-4/5 p-6">
-            <div className="font-semibold text-xl">
+        <div
+          key={`${item.card.info.id}-${index}`}
+          className="flex flex-col-reverse sm:flex-row p-4 sm:p-6 border-gray-200 border-b-2 justify-between gap-4"
+        >
+          {/* Text Content */}
+          <div className="w-full sm:w-4/5 text-start">
+            <div className="font-semibold text-lg sm:text-xl mb-1">
               {item?.card?.info?.name}
             </div>
-            <div>
-              <span className="font-semibold text-lg text-gray-500">
-                ₹ {item?.card?.info?.price ? item?.card?.info?.price/100 : item?.card?.info?.defaultPrice}
-                {item?.card?.info?.ratings?.aggregatedRating?.rating} ⭐
-              </span>
+            <div className="text-gray-500 text-sm sm:text-base mb-1">
+              ₹{" "}
+              {item?.card?.info?.price
+                ? item?.card?.info?.price / 100
+                : item?.card?.info?.defaultPrice}
+              {"  "}
+              {item?.card?.info?.ratings?.aggregatedRating?.rating} ⭐
             </div>
-            <p className="text-gray-800">{item?.card?.info?.description}</p>
+            <p className="text-gray-800 text-sm">
+              {item?.card?.info?.description}
+            </p>
           </div>
 
-          <div className="w-1/5">
-            <img src={IMG_URL + item?.card?.info?.imageId} className="w-30 h-30 object-contain rounded-md bg-white"/>
-            <span className="bg-white text-green-600 text-md font-bold rounded-md relative px-2 py-1 shadow-lg cursor-pointer" 
-            onClick={()=> handleAddItem(item)}>
+          {/* Image and Button */}
+          <div className="w-full sm:w-1/5 flex flex-col items-center justify-between">
+            <img
+              src={IMG_URL + item?.card?.info?.imageId}
+              className="w-full aspect-square object-cover rounded-md"
+              alt={item?.card?.info?.name}
+            />
+            <span
+              className="bg-white text-green-600 text-md font-bold rounded-md relative px-2 py-1 shadow-lg cursor-pointer mt-2"
+              onClick={() => handleAddItem(item)}
+            >
               ADD +
             </span>
           </div>

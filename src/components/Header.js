@@ -78,7 +78,7 @@ const Header = () => {
             <span className="block px-4 sm:px-0">Service</span>
           </li> */}
           <li className="py-2 font-bold hover:bg-gray-100 sm:hover:bg-transparent rounded-md transition-colors">
-            <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="block px-4 sm:px-0 relative">
+            <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="block px-2 lg:px-2 relative">
               <FaShoppingCart className="text-xl" />
               <span className="absolute -top-3 -right-3 bg-red-600 text-white text-sm px-2 py-0.5 rounded-full">
                 {cartItems.length}

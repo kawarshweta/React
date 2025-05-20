@@ -80,18 +80,19 @@ const Body = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-center p-4">
-        {filteredRestaurants.map((restaurant) => (
-          <Link
-            className="w-full sm:w-72 md:w-80 lg:w-96"
-            key={restaurant.info.id}
-            to={`/restaurantmenu/${restaurant.info.id}`}
-          >
-            {/* {
+        {Array.isArray(filteredRestaurants) &&
+          filteredRestaurants.map((restaurant) => (
+            <Link
+              className="w-full sm:w-72 md:w-80 lg:w-96"
+              key={restaurant.info.id}
+              to={`/restaurantmenu/${restaurant.info.id}`}
+            >
+              {/* {
               restaurant.data.promoted === true ? <promotedRestaurantCards restData={restaurant}/> : <RestaurantCard restData={restaurant} />
             } */}
-            <RestaurantCard restData={restaurant} />
-          </Link>
-        ))}
+              <RestaurantCard restData={restaurant} />
+            </Link>
+          ))}
       </div>
     </div>
   );
